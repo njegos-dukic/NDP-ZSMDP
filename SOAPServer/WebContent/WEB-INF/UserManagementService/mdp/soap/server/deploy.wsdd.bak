@@ -1,0 +1,55 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserManagementService WSDL service -->
+
+  <service name="UserManagement" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://server.soap.mdp"/>
+      <parameter name="wsdlServiceElement" value="UserManagementService"/>
+      <parameter name="schemaQualified" value="http://server.soap.mdp"/>
+      <parameter name="wsdlServicePort" value="UserManagement"/>
+      <parameter name="className" value="mdp.soap.server.UserManagementSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UserManagement"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addUser" qname="operNS:AddUser" xmlns:operNS="http://server.soap.mdp" soapAction="" >
+        <parameter qname="pns:u" xmlns:pns="http://server.soap.mdp" type="tns:anyType" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="serializeUsers" qname="operNS:SerializeUsers" xmlns:operNS="http://server.soap.mdp" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="addUser serializeUsers"/>
+
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:>SerializeUsers"
+        type="java:mdp.soap.server.SerializeUsers"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:>SerializeUsersResponse"
+        type="java:mdp.soap.server.SerializeUsersResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:>AddUserResponse"
+        type="java:mdp.soap.server.AddUserResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

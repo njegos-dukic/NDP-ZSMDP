@@ -1,0 +1,119 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\njego\eclipse-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\SOAPServer\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="ReverseString" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="reverse" qname="ns1:reverse" returnQName="ns1:reverseReturn" returnType="xsd:string" soapAction="" xmlns:ns1="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:input" type="xsd:string"/>
+  </ns2:operation>
+  <ns1:parameter name="allowedMethods" value="reverse"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="ReverseString"/>
+  <ns1:parameter name="className" value="mdp.soap.server.ReverseString"/>
+  <ns1:parameter name="wsdlServicePort" value="ReverseString"/>
+  <ns1:parameter name="schemaQualified" value="http://server.soap.mdp"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://server.soap.mdp"/>
+  <ns1:parameter name="wsdlServiceElement" value="ReverseStringService"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="UserManagementService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="addUser" qname="ns2:addUser" returnQName="ns2:addUserReturn" returnType="xsd:boolean" soapAction="" xmlns:ns2="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:username" type="xsd:string"/>
+   <ns1:parameter qname="ns2:password" type="xsd:string"/>
+   <ns1:parameter qname="ns2:idZS" type="xsd:int"/>
+   <ns1:parameter qname="ns2:stationName" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getAllUsers" qname="ns3:getAllUsers" returnQName="ns3:getAllUsersReturn" returnType="ns3:Users" soapAction="" xmlns:ns3="http://server.soap.mdp"/>
+  <ns1:operation name="getAllStations" qname="ns4:getAllStations" returnQName="ns4:getAllStationsReturn" returnType="ns4:SerializableStation" soapAction="" xmlns:ns4="http://server.soap.mdp"/>
+  <ns1:operation name="isOnline" qname="ns5:isOnline" returnQName="ns5:isOnlineReturn" returnType="xsd:boolean" soapAction="" xmlns:ns5="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:username" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="setOnline" qname="ns6:setOnline" soapAction="" xmlns:ns6="http://server.soap.mdp">
+   <ns1:parameter qname="ns6:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="removeUser" qname="ns7:removeUser" returnQName="ns7:removeUserReturn" returnType="xsd:boolean" soapAction="" xmlns:ns7="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns7:username" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getByIdZSMDP" qname="ns8:getByIdZSMDP" returnQName="ns8:getByIdZSMDPReturn" returnType="ns8:SerializableStation" soapAction="" xmlns:ns8="http://server.soap.mdp">
+   <ns1:parameter qname="ns8:id" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAllActiveUsers" qname="ns9:getAllActiveUsers" returnQName="ns9:getAllActiveUsersReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns9:zsmdpId" type="xsd:int"/>
+  </ns1:operation>
+  <ns1:operation name="getAllZsmdpIds" qname="ns10:getAllZsmdpIds" returnQName="ns10:getAllZsmdpIdsReturn" returnType="xsd:int" soapAction="" xmlns:ns10="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="getIdZsmdp" qname="ns11:getIdZsmdp" returnQName="ns11:getIdZsmdpReturn" returnType="xsd:int" soapAction="" xmlns:ns11="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns11:username" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="checkCredentials" qname="ns12:checkCredentials" returnQName="ns12:checkCredentialsReturn" returnType="xsd:boolean" soapAction="" xmlns:ns12="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns12:username" type="xsd:string"/>
+   <ns1:parameter qname="ns12:password" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="logOutUser" qname="ns13:logOutUser" soapAction="" xmlns:ns13="http://server.soap.mdp">
+   <ns1:parameter qname="ns13:username" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getAllActiveUsersByStationName" qname="ns14:getAllActiveUsersByStationName" returnQName="ns14:getAllActiveUsersByStationNameReturn" returnType="xsd:string" soapAction="" xmlns:ns14="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns14:name" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getPort" qname="ns15:getPort" returnQName="ns15:getPortReturn" returnType="xsd:int" soapAction="" xmlns:ns15="http://server.soap.mdp" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns15:username" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getAllUsers setOnline getIdZsmdp addUser getAllZsmdpIds isOnline logOutUser getByIdZSMDP getAllStations checkCredentials getPort removeUser getAllActiveUsersByStationName getAllActiveUsers"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="UserManagementService"/>
+  <ns1:parameter name="className" value="mdp.soap.server.UserManagementService"/>
+  <ns1:parameter name="wsdlServicePort" value="UserManagementService"/>
+  <ns1:parameter name="schemaQualified" value="http://server.soap.mdp"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://server.soap.mdp"/>
+  <ns1:parameter name="wsdlServiceElement" value="UserManagementServiceService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:Users" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:mdp.soap.server.Users" xmlns:ns16="http://server.soap.mdp"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns17:User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:mdp.soap.server.User" xmlns:ns17="http://server.soap.mdp"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns18:SerializableStation" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:mdp.soap.server.SerializableStation" xmlns:ns18="http://server.soap.mdp"/>
+  <ns1:arrayMapping innerType="ns19:User" languageSpecificType="java:mdp.soap.server.User[]" qname="ns19:ArrayOfUser" xmlns:ns19="http://server.soap.mdp"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

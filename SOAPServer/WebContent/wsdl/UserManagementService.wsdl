@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://server.soap.mdp" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://server.soap.mdp" xmlns:intf="http://server.soap.mdp" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://server.soap.mdp" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="addUser">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+      <element name="idZS" type="xsd:int"/>
+      <element name="stationName" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addUserResponse">
+    <complexType>
+     <sequence>
+      <element name="addUserReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllUsers">
+    <complexType/>
+   </element>
+   <element name="getAllUsersResponse">
+    <complexType>
+     <sequence>
+      <element name="getAllUsersReturn" type="impl:Users"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="User">
+    <sequence>
+     <element name="idZS" type="xsd:int"/>
+     <element name="isOnline" type="xsd:boolean"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="port" type="xsd:int"/>
+     <element name="stationName" nillable="true" type="xsd:string"/>
+     <element name="username" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfUser">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="impl:User"/>
+    </sequence>
+   </complexType>
+   <complexType name="Users">
+    <sequence>
+     <element name="users" nillable="true" type="impl:ArrayOfUser"/>
+    </sequence>
+   </complexType>
+   <element name="getAllStations">
+    <complexType/>
+   </element>
+   <element name="getAllStationsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllStationsReturn" type="impl:SerializableStation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="SerializableStation">
+    <sequence>
+     <element name="idTS" type="xsd:int"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="isOnline">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isOnlineResponse">
+    <complexType>
+     <sequence>
+      <element name="isOnlineReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setOnline">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setOnlineResponse">
+    <complexType/>
+   </element>
+   <element name="removeUser">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeUserResponse">
+    <complexType>
+     <sequence>
+      <element name="removeUserReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByIdZSMDP">
+    <complexType>
+     <sequence>
+      <element name="id" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getByIdZSMDPResponse">
+    <complexType>
+     <sequence>
+      <element name="getByIdZSMDPReturn" type="impl:SerializableStation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllActiveUsers">
+    <complexType>
+     <sequence>
+      <element name="zsmdpId" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllActiveUsersResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllActiveUsersReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllZsmdpIds">
+    <complexType/>
+   </element>
+   <element name="getAllZsmdpIdsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllZsmdpIdsReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getIdZsmdp">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getIdZsmdpResponse">
+    <complexType>
+     <sequence>
+      <element name="getIdZsmdpReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkCredentials">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkCredentialsResponse">
+    <complexType>
+     <sequence>
+      <element name="checkCredentialsReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="logOutUser">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="logOutUserResponse">
+    <complexType/>
+   </element>
+   <element name="getAllActiveUsersByStationName">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getAllActiveUsersByStationNameResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getAllActiveUsersByStationNameReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPort">
+    <complexType>
+     <sequence>
+      <element name="username" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPortResponse">
+    <complexType>
+     <sequence>
+      <element name="getPortReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="removeUserRequest">
+
+      <wsdl:part element="impl:removeUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkCredentialsResponse">
+
+      <wsdl:part element="impl:checkCredentialsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPortRequest">
+
+      <wsdl:part element="impl:getPort" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserResponse">
+
+      <wsdl:part element="impl:addUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllStationsResponse">
+
+      <wsdl:part element="impl:getAllStationsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getByIdZSMDPResponse">
+
+      <wsdl:part element="impl:getByIdZSMDPResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setOnlineResponse">
+
+      <wsdl:part element="impl:setOnlineResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllActiveUsersByStationNameRequest">
+
+      <wsdl:part element="impl:getAllActiveUsersByStationName" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="logOutUserRequest">
+
+      <wsdl:part element="impl:logOutUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersRequest">
+
+      <wsdl:part element="impl:getAllUsers" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPortResponse">
+
+      <wsdl:part element="impl:getPortResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getIdZsmdpResponse">
+
+      <wsdl:part element="impl:getIdZsmdpResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setOnlineRequest">
+
+      <wsdl:part element="impl:setOnline" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isOnlineResponse">
+
+      <wsdl:part element="impl:isOnlineResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllZsmdpIdsRequest">
+
+      <wsdl:part element="impl:getAllZsmdpIds" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllStationsRequest">
+
+      <wsdl:part element="impl:getAllStations" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllZsmdpIdsResponse">
+
+      <wsdl:part element="impl:getAllZsmdpIdsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getIdZsmdpRequest">
+
+      <wsdl:part element="impl:getIdZsmdp" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllActiveUsersRequest">
+
+      <wsdl:part element="impl:getAllActiveUsers" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isOnlineRequest">
+
+      <wsdl:part element="impl:isOnline" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addUserRequest">
+
+      <wsdl:part element="impl:addUser" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeUserResponse">
+
+      <wsdl:part element="impl:removeUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllUsersResponse">
+
+      <wsdl:part element="impl:getAllUsersResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkCredentialsRequest">
+
+      <wsdl:part element="impl:checkCredentials" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllActiveUsersResponse">
+
+      <wsdl:part element="impl:getAllActiveUsersResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getAllActiveUsersByStationNameResponse">
+
+      <wsdl:part element="impl:getAllActiveUsersByStationNameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="logOutUserResponse">
+
+      <wsdl:part element="impl:logOutUserResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getByIdZSMDPRequest">
+
+      <wsdl:part element="impl:getByIdZSMDP" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UserManagementService">
+
+      <wsdl:operation name="addUser">
+
+         <wsdl:input message="impl:addUserRequest" name="addUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addUserResponse" name="addUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsers">
+
+         <wsdl:input message="impl:getAllUsersRequest" name="getAllUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllUsersResponse" name="getAllUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllStations">
+
+         <wsdl:input message="impl:getAllStationsRequest" name="getAllStationsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllStationsResponse" name="getAllStationsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isOnline">
+
+         <wsdl:input message="impl:isOnlineRequest" name="isOnlineRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isOnlineResponse" name="isOnlineResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setOnline">
+
+         <wsdl:input message="impl:setOnlineRequest" name="setOnlineRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setOnlineResponse" name="setOnlineResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeUser">
+
+         <wsdl:input message="impl:removeUserRequest" name="removeUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeUserResponse" name="removeUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByIdZSMDP">
+
+         <wsdl:input message="impl:getByIdZSMDPRequest" name="getByIdZSMDPRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getByIdZSMDPResponse" name="getByIdZSMDPResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllActiveUsers">
+
+         <wsdl:input message="impl:getAllActiveUsersRequest" name="getAllActiveUsersRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllActiveUsersResponse" name="getAllActiveUsersResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllZsmdpIds">
+
+         <wsdl:input message="impl:getAllZsmdpIdsRequest" name="getAllZsmdpIdsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllZsmdpIdsResponse" name="getAllZsmdpIdsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getIdZsmdp">
+
+         <wsdl:input message="impl:getIdZsmdpRequest" name="getIdZsmdpRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getIdZsmdpResponse" name="getIdZsmdpResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkCredentials">
+
+         <wsdl:input message="impl:checkCredentialsRequest" name="checkCredentialsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:checkCredentialsResponse" name="checkCredentialsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logOutUser">
+
+         <wsdl:input message="impl:logOutUserRequest" name="logOutUserRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:logOutUserResponse" name="logOutUserResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllActiveUsersByStationName">
+
+         <wsdl:input message="impl:getAllActiveUsersByStationNameRequest" name="getAllActiveUsersByStationNameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getAllActiveUsersByStationNameResponse" name="getAllActiveUsersByStationNameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPort">
+
+         <wsdl:input message="impl:getPortRequest" name="getPortRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPortResponse" name="getPortResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="UserManagementServiceSoapBinding" type="impl:UserManagementService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="addUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllUsersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllUsersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllStations">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllStationsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllStationsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isOnline">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isOnlineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isOnlineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setOnline">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setOnlineRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setOnlineResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getByIdZSMDP">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getByIdZSMDPRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getByIdZSMDPResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllActiveUsers">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllActiveUsersRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllActiveUsersResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllZsmdpIds">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllZsmdpIdsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllZsmdpIdsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getIdZsmdp">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getIdZsmdpRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getIdZsmdpResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkCredentials">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkCredentialsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkCredentialsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="logOutUser">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="logOutUserRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="logOutUserResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getAllActiveUsersByStationName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getAllActiveUsersByStationNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getAllActiveUsersByStationNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPort">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPortRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPortResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UserManagementServiceService">
+
+      <wsdl:port binding="impl:UserManagementServiceSoapBinding" name="UserManagementService">
+
+         <wsdlsoap:address location="http://localhost:8080/SOAPServer/services/UserManagementService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

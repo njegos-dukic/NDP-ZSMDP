@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/mdp/soap/server/SerializableStation.java=UTF-8
+encoding//src/mdp/soap/server/User.java=UTF-8
+encoding//src/mdp/soap/server/UserManagementService.java=UTF-8
+encoding//src/mdp/soap/server/UserManagementServiceService.java=UTF-8
+encoding//src/mdp/soap/server/UserManagementServiceServiceLocator.java=UTF-8
+encoding//src/mdp/soap/server/UserManagementServiceSoapBindingStub.java=UTF-8
+encoding//src/mdp/soap/server/Users.java=UTF-8

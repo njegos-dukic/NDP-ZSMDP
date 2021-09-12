@@ -1,0 +1,100 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserManagementServiceService WSDL service -->
+
+  <service name="UserManagementService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://server.soap.mdp"/>
+      <parameter name="wsdlServiceElement" value="UserManagementServiceService"/>
+      <parameter name="schemaQualified" value="http://server.soap.mdp"/>
+      <parameter name="wsdlServicePort" value="UserManagementService"/>
+      <parameter name="className" value="mdp.soap.server.UserManagementServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UserManagementService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="addUser" qname="operNS:addUser" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:addUserReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:idZS" xmlns:pns="http://server.soap.mdp" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:stationName" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllUsers" qname="operNS:getAllUsers" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getAllUsersReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:Users" xmlns:rtns="http://server.soap.mdp" soapAction="" >
+      </operation>
+      <operation name="getAllStations" qname="operNS:getAllStations" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getAllStationsReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:SerializableStation" xmlns:rtns="http://server.soap.mdp" soapAction="" >
+      </operation>
+      <operation name="isOnline" qname="operNS:isOnline" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:isOnlineReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="setOnline" qname="operNS:setOnline" xmlns:operNS="http://server.soap.mdp" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="removeUser" qname="operNS:removeUser" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:removeUserReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getByIdZSMDP" qname="operNS:getByIdZSMDP" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getByIdZSMDPReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:SerializableStation" xmlns:rtns="http://server.soap.mdp" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://server.soap.mdp" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllActiveUsers" qname="operNS:getAllActiveUsers" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getAllActiveUsersReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:zsmdpId" xmlns:pns="http://server.soap.mdp" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllZsmdpIds" qname="operNS:getAllZsmdpIds" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getAllZsmdpIdsReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <operation name="getIdZsmdp" qname="operNS:getIdZsmdp" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getIdZsmdpReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="checkCredentials" qname="operNS:checkCredentials" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:checkCredentialsReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="logOutUser" qname="operNS:logOutUser" xmlns:operNS="http://server.soap.mdp" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getAllActiveUsersByStationName" qname="operNS:getAllActiveUsersByStationName" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getAllActiveUsersByStationNameReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:name" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getPort" qname="operNS:getPort" xmlns:operNS="http://server.soap.mdp" returnQName="retNS:getPortReturn" xmlns:retNS="http://server.soap.mdp" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://server.soap.mdp" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getAllUsers setOnline getIdZsmdp addUser getAllZsmdpIds isOnline logOutUser getByIdZSMDP getAllStations checkCredentials getPort removeUser getAllActiveUsersByStationName getAllActiveUsers"/>
+
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:Users"
+        type="java:mdp.soap.server.Users"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:User"
+        type="java:mdp.soap.server.User"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:ArrayOfUser"
+        type="java:mdp.soap.server.User[]"
+        innerType="cmp-ns:User" xmlns:cmp-ns="http://server.soap.mdp"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://server.soap.mdp"
+        qname="ns:SerializableStation"
+        type="java:mdp.soap.server.SerializableStation"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
