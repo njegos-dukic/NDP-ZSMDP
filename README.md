@@ -1,4 +1,4 @@
-# NDP-ZSMDP
+# NDP - Train Station
 Network and Distributed Programming School Project.
   - Train station application with chat functionality.
   - Central application for data management.
