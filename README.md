@@ -1,5 +1,8 @@
 # NDP-ZSMDP
 Network and Distributed Programming School Project.
+  - Train station application with chat functionality.
+  - Central application for data management.
+  - Sockets & Web Services (SOAP & REST) for communication. 
 
 <img src="./Folder Structure/RESOURCES/logo.png" width = 100 height = 100 alt="Corona Virus Icon"/>
 
